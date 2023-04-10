@@ -1,3 +1,4 @@
+import { getBaseUrl } from "@/utils";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -24,10 +25,31 @@ export async function GET(request: Request) {
 
   const text = await response.text();
 
-  const redirectUrl = new URL("http://localhost:3000/app");
-  const token = text.split("=")[1].split("&")[0];
-  redirectUrl.searchParams.append("token", token);
+  // TODO: better error checking here
 
-  // return NextResponse.json({ message: "deezer-stats", data: token });
+  if (text === "Parameters missing") {
+    return NextResponse.redirect("/", 302);
+  }
+
+  if (text === "wrong code") {
+    return NextResponse.redirect("/", 302);
+  }
+
+  const paramsList = text.split("&");
+  const paramsObject: { [key: string]: string } = {};
+
+  for (const param of paramsList) {
+    const [name, value] = param.split("=");
+    paramsObject[name] = value;
+  }
+
+  if (!paramsObject.access_token) {
+    return NextResponse.redirect("/", 302);
+  }
+
+  const redirectUrl = new URL(`${getBaseUrl()}/app`);
+
+  redirectUrl.searchParams.append("token", paramsObject.access_token);
+
   return NextResponse.redirect(redirectUrl, 302);
 }
