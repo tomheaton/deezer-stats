@@ -1,7 +1,7 @@
 import { getBaseUrl } from "@/utils";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const url = new URL(request.url);
 
   const requestUrl = new URL(
@@ -18,10 +18,6 @@ export async function GET(request: Request) {
       "Content-Type": "text/html; charset=UTF-8",
     },
   });
-
-  console.log("response status:", response.status);
-  console.log("response:", JSON.stringify(response, null, 2));
-  console.log("content-type:", response.headers.get("content-type"));
 
   const text = await response.text();
 

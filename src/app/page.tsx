@@ -6,7 +6,7 @@ export default async function Page() {
       <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
         deezer-stats
       </h1>
-      <p>view your deezer stats</p>
+      <p className="leading-tight">view your deezer stats</p>
       <br />
       <Link href="/connect">
         <button className="rounded-lg bg-purple-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-purple-700">

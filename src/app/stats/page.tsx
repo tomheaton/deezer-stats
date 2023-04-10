@@ -53,7 +53,7 @@ export default async function Page({ searchParams }: Props) {
       </h1>
       {history.data ? (
         <>
-          <p>history: {history.data.length}</p>
+          <p className="leading-tight">history: {history.data.length}</p>
           <ul>
             {history.data.map((item: any) => (
               <li key={item.id}>{item.title}</li>
