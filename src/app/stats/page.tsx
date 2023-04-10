@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
-  title: "app | deezer-stats",
+  title: "stats | deezer-stats",
 };
 
 type Props = {
@@ -24,7 +22,7 @@ const getHistory = async (token?: string) => {
   url.searchParams.set("access_token", token);
 
   const response = await fetch(
-    `https://api.deezer.com/user/me/history?access_token=${token}`
+    `https://api.deezer.com/user/me/history?access_token=${token}`,
   );
 
   const data = await response.json();
@@ -49,8 +47,8 @@ export default async function Page({ searchParams }: Props) {
   const history = await getHistory(token);
 
   return (
-    <main className="mx-auto py-8 min-h-screen container flex flex-col items-center justify-center">
-      <h1 className="font-extrabold tracking-tighter text-5xl mb-2">
+    <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
+      <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
         deezer-stats
       </h1>
       {history.data ? (

@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export default async function Page() {
   return (
-    <main className="mx-auto py-8 min-h-screen container flex flex-col items-center justify-center">
-      <h1 className="font-extrabold tracking-tighter text-5xl mb-2">
+    <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
+      <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
         deezer-stats
       </h1>
       <p>view your deezer stats</p>
       <br />
       <Link href="/connect">
-        <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all">
+        <button className="rounded-lg bg-purple-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-purple-700">
           Login with Deezer
         </button>
       </Link>

@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
 
   const requestUrl = new URL(
-    "https://connect.deezer.com/oauth/access_token.php"
+    "https://connect.deezer.com/oauth/access_token.php",
   );
 
   requestUrl.searchParams.append("code", url.searchParams.get("code") ?? "");
@@ -47,7 +47,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect("/", 302);
   }
 
-  const redirectUrl = new URL(`${getBaseUrl()}/app`);
+  const redirectUrl = new URL(`${getBaseUrl()}/stats`);
 
   redirectUrl.searchParams.append("token", paramsObject.access_token);
 
