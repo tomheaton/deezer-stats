@@ -42,9 +42,30 @@ const getHistory = async (token?: string) => {
     };
   }
 
+  let _data: any = [...data.data];
+
+  if (data.next) {
+    console.log("NEXT");
+    const response = await fetch(url);
+    const newData = await response.json();
+    _data = [..._data, ...newData.data];
+    if (newData.next) {
+      console.log("NEXT AGAIN");
+      const response = await fetch(url);
+      const newData = await response.json();
+      _data = [..._data, ...newData.data];
+      if (newData.next) {
+        console.log("NEXT AGAIN AGAIN");
+        const response = await fetch(url);
+        const newData = await response.json();
+        _data = [..._data, ...newData.data];
+      }
+    }
+  }
+
   return {
     success: true,
-    data: data.data.flatMap((m: unknown) => {
+    data: _data.flatMap((m: unknown) => {
       const music = musicSchema.safeParse(m);
       return music.success ? music.data : [];
     }),
@@ -64,7 +85,7 @@ const getFavourites = async (token?: string) => {
 
   const response = await fetch(url);
   const data = await response.json();
-  console.log("data", JSON.stringify(data, null, 2));
+  // console.log("data", JSON.stringify(data, null, 2));
 
   if (data.error) {
     console.error("error", data.error);
@@ -123,7 +144,8 @@ export default async function Page({ searchParams }: Props) {
     const sortedArtists = Object.values(artistMap).sort(
       (a, b) => b.playCount - a.playCount,
     );
-    return sortedArtists.slice(0, 10); // Return top 10 favorite artists
+
+    return sortedArtists.slice(0, 10);
   };
 
   return (
