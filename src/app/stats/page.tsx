@@ -1,4 +1,4 @@
-import { musicSchema } from "@/utils/types";
+import { MusicType, musicSchema } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -25,7 +25,7 @@ const getHistory = async (token?: string) => {
 
   const response = await fetch(url);
   const data = await response.json();
-  // console.log("data", data);
+  // console.log("data", JSON.stringify(data, null, 2));
 
   if (data.error) {
     console.error("error", data.error);
@@ -64,7 +64,7 @@ const getFavourites = async (token?: string) => {
 
   const response = await fetch(url);
   const data = await response.json();
-  console.log("data", data);
+  console.log("data", JSON.stringify(data, null, 2));
 
   if (data.error) {
     console.error("error", data.error);
@@ -96,6 +96,36 @@ export default async function Page({ searchParams }: Props) {
   const history = await getHistory(token);
   const favourites = await getFavourites(token);
 
+  const getUserFavoriteArtists = (history: MusicType[]) => {
+    const artistMap: {
+      [key: string]: {
+        id: number;
+        name: string;
+        playCount: number;
+      };
+    } = {};
+
+    history.forEach((track) => {
+      const artistId = track.artist.id;
+      const artistName = track.artist.name;
+
+      if (!artistMap[artistId]) {
+        artistMap[artistId] = {
+          id: artistId,
+          name: artistName,
+          playCount: 0,
+        };
+      }
+
+      artistMap[artistId].playCount++;
+    });
+
+    const sortedArtists = Object.values(artistMap).sort(
+      (a, b) => b.playCount - a.playCount,
+    );
+    return sortedArtists.slice(0, 10); // Return top 10 favorite artists
+  };
+
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
       <Link href="/">
@@ -108,6 +138,13 @@ export default async function Page({ searchParams }: Props) {
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             History
           </h2>
+          <ol>
+            {getUserFavoriteArtists(history.data).map((artist) => (
+              <li key={artist.id}>
+                {artist.name} - {artist.playCount}
+              </li>
+            ))}
+          </ol>
           {history.data ? (
             <>
               <p className="italic leading-tight">
@@ -127,6 +164,13 @@ export default async function Page({ searchParams }: Props) {
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             Favourites
           </h2>
+          <ol>
+            {getUserFavoriteArtists(favourites.data).map((artist) => (
+              <li key={artist.id}>
+                {artist.name} - {artist.playCount}
+              </li>
+            ))}
+          </ol>
           {favourites.data ? (
             <>
               <p className="italic leading-tight">

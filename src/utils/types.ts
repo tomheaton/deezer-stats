@@ -12,6 +12,7 @@ export const musicSchema = z.object({
   // https://cdns-preview-6.dzcdn.net/stream/c-6430575d1f202af381f403b4752438af-6.mp3
   // preview: z.string().url(),
   artist: z.object({
+    id: z.number(),
     name: z.string(),
   }),
   album: z.object({
