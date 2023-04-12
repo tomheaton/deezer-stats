@@ -4,6 +4,14 @@ const nextConfig = {
     appDir: true,
     typedRoutes: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "e-cdns-images.dzcdn.net",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
