@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import "@/styles/globals.css";
 import type { PropsWithChildren } from "react";
 
@@ -9,7 +10,10 @@ export const metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
