@@ -9,9 +9,7 @@ export default async function Page() {
       <p className="leading-tight">view your deezer stats</p>
       <br />
       <Link href="/connect">
-        <button className="rounded-lg bg-purple-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-purple-700">
-          Login with Deezer
-        </button>
+        <button className="btn">Login with Deezer</button>
       </Link>
     </main>
   );

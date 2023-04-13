@@ -25,3 +25,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.btn {
+  @apply rounded-lg bg-purple-500 px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:bg-purple-700 active:scale-95;
+}

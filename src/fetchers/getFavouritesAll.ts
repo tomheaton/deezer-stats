@@ -1,8 +1,11 @@
-import { musicSchema } from "@/utils/types";
+import { musicSchema, type Range } from "@/utils/types";
 
 export default async function getFavouritesAll(
-  token?: string,
-  limit: number = 1000,
+  token: string | undefined,
+  config?: {
+    limit?: number;
+    range?: Range;
+  },
 ) {
   if (!token) {
     return {
@@ -35,7 +38,7 @@ export default async function getFavouritesAll(
   while (nextUrl) {
     count = count + 1;
     // console.log("nextUrl", nextUrl);
-    if (allData.length >= limit) {
+    if (allData.length >= (config?.limit ?? 100)) {
       // console.log("limit reached");
       break;
     }
@@ -57,13 +60,35 @@ export default async function getFavouritesAll(
     };
   }
 
+  let musicData = allData
+    .flatMap((m: unknown) => {
+      const music = musicSchema.safeParse(m);
+      return music.success ? music.data : [];
+    })
+    .reverse();
+
+  if (config?.range) {
+    if (config.range === "short_term") {
+      musicData = musicData.filter((m) => {
+        const date = new Date(m.time_add);
+        const now = new Date();
+        const diff = now.getTime() - date.getTime();
+        const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+        return diffDays <= 28;
+      });
+    } else if (config.range === "medium_term") {
+      musicData = musicData.filter((m) => {
+        const date = new Date(m.time_add);
+        const now = new Date();
+        const diff = now.getTime() - date.getTime();
+        const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+        return diffDays <= 180;
+      });
+    }
+  }
+
   return {
     success: true,
-    data: allData
-      .flatMap((m: unknown) => {
-        const music = musicSchema.safeParse(m);
-        return music.success ? music.data : [];
-      })
-      .reverse(),
+    data: musicData,
   };
 }

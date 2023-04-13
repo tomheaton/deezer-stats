@@ -51,7 +51,7 @@ export default async function Page({
           </h2>
           <MusicChart
             labels={topArtists.map((a) => a.name)}
-            label={"Top Ten Artists"}
+            label={"Play Count"}
             data={topArtists.map((a) => a.playCount)}
           />
           {/* <div className="flex flex-col space-y-1">

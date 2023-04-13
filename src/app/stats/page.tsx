@@ -5,6 +5,7 @@ import type { MusicType } from "@/utils/types";
 import dayjs from "dayjs";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { useState } from "react";
 
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 
@@ -25,7 +26,7 @@ export default async function Page({
   const history = await getHistoryAll(token);
 
   // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, 10_000);
+  const favourites = await getFavouritesAll(token, { limit: 1_000 });
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">

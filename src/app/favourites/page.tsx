@@ -1,6 +1,8 @@
 import MusicChart from "@/components/music_chart";
+import RangeSelector from "@/components/range_selector";
 import getFavouritesAll from "@/fetchers/getFavouritesAll";
 import { getTopTenArtists } from "@/utils";
+import type { Range } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -29,12 +31,16 @@ export default async function Page({
 }: {
   searchParams?: {
     token?: string;
+    range?: string;
   };
 }) {
-  const { token } = searchParams || {};
+  const { token, range } = searchParams || {};
 
   // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, 10_000);
+  const favourites = await getFavouritesAll(token, {
+    limit: 10_000,
+    range: range ? (range as Range) : "long_term",
+  });
 
   const topArtists = getTopTenArtists(favourites.data ?? []);
 
@@ -45,6 +51,7 @@ export default async function Page({
           deezer-stats
         </h1>
       </Link>
+      <RangeSelector />
       <div className={"flex w-full flex-wrap justify-evenly"}>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">
@@ -52,7 +59,7 @@ export default async function Page({
           </h2>
           <MusicChart
             labels={topArtists.map((a) => a.name)}
-            label={"Top Ten Artists"}
+            label={"Play Count"}
             data={topArtists.map((a) => a.playCount)}
           />
           {/* <div className="flex flex-col space-y-1">

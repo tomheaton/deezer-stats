@@ -33,3 +33,5 @@ export const musicSchema = z
   }));
 
 export type MusicType = z.infer<typeof musicSchema>;
+
+export type Range = "short_term" | "medium_term" | "long_term";
