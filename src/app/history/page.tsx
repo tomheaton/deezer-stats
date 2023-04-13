@@ -1,8 +1,7 @@
-import getFavouritesAll from "@/fetchers/getFavouritesAll";
+import MusicChart from "@/components/music_chart";
+import getHistoryAll from "@/fetchers/getHistoryAll";
 import { getTopTenArtists } from "@/utils";
-import { MusicType } from "@/utils/types";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 
 const textSizes = [
@@ -22,7 +21,7 @@ const textSizes = [
 ].reverse();
 
 export const metadata: Metadata = {
-  title: "test | deezer-stats",
+  title: "history | deezer-stats",
 };
 
 export default async function Page({
@@ -34,10 +33,9 @@ export default async function Page({
 }) {
   const { token } = searchParams || {};
 
-  // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, 10_000);
+  const history = await getHistoryAll(token, 10_000);
 
-  const topArtists = getTopTenArtists(favourites.data ?? []);
+  const topArtists = getTopTenArtists(history.data ?? []);
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
@@ -46,32 +44,24 @@ export default async function Page({
           deezer-stats
         </h1>
       </Link>
-      <div className={"flex w-full flex-wrap-reverse justify-evenly"}>
+      <div className={"flex w-full flex-wrap justify-evenly"}>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">
-            Favourite Tracks ({favourites.data?.length ?? "none"})
+            History ({history.data?.length ?? "none"})
           </h2>
-          <div className="flex flex-col space-y-1">
+          <MusicChart
+            labels={topArtists.map((a) => a.name)}
+            label={"Top Ten Artists"}
+            data={topArtists.map((a) => a.playCount)}
+          />
+          {/* <div className="flex flex-col space-y-1">
             {favourites.success &&
-              favourites.data?.slice(0, 100).map((track: MusicType) => (
-                <div
-                  key={track.id}
-                  className="flex items-center space-x-2 rounded-lg border-2 border-purple-400 p-4 transition-all hover:scale-105"
-                >
-                  <Image
-                    src={track.album.cover_xl}
-                    alt={track.album.title}
-                    className="h-16 w-16 rounded-lg"
-                    width={1000}
-                    height={1000}
-                  />
-                  <div>
-                    <p className="font-bold tracking-tight">{track.title}</p>
-                    <p className="text-sm">{track.artist.name}</p>
-                  </div>
-                </div>
-              ))}
-          </div>
+              favourites.data
+                ?.slice(0, 100)
+                .map((track: MusicType) => (
+                  <MusicCard key={track.id} music={track} />
+                ))}
+          </div> */}
         </div>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">
@@ -80,7 +70,10 @@ export default async function Page({
           <div className="flex flex-col space-y-1">
             <ol>
               {topArtists.map((artist, index) => (
-                <li key={artist.id} className={`${textSizes[index]}`}>
+                <li
+                  key={artist.id}
+                  className={`${textSizes[index]} text-center`}
+                >
                   {artist.name}
                 </li>
               ))}

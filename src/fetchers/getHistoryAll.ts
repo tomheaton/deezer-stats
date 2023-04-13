@@ -34,9 +34,9 @@ export default async function getHistoryAll(
   // loop to fetch and append subsequent sets of data until there is no more data to retrieve
   while (nextUrl) {
     count = count + 1;
-    console.log("nextUrl", nextUrl);
+    // console.log("nextUrl", nextUrl);
     if (allData.length >= limit) {
-      console.log("limit reached");
+      // console.log("limit reached");
       break;
     }
     let response = await fetch(nextUrl);
@@ -46,9 +46,9 @@ export default async function getHistoryAll(
     nextUrl = data.next;
   }
 
-  console.log("count:", count);
+  // console.log("count:", count);
   // console.log("data:", allData);
-  console.log("length:", allData.length);
+  // console.log("length:", allData.length);
 
   if (!data || !allData) {
     return {

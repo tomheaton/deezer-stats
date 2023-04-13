@@ -12,7 +12,7 @@ type Props = {
   data: number[];
 };
 
-export default function Chart({ labels, label, data }: Props) {
+export default function MusicChart({ labels, label, data }: Props) {
   const chartData = useMemo(
     () => ({
       labels,
@@ -51,5 +51,16 @@ export default function Chart({ labels, label, data }: Props) {
     [labels, label, data],
   );
 
-  return <Pie data={chartData} />;
+  return (
+    <Pie
+      data={chartData}
+      options={{
+        plugins: {
+          legend: {
+            // position: "bottom",
+          },
+        },
+      }}
+    />
+  );
 }

@@ -1,3 +1,4 @@
+import MusicCard from "@/components/music_card";
 import getFavouritesAll from "@/fetchers/getFavouritesAll";
 import getHistoryAll from "@/fetchers/getHistoryAll";
 import type { MusicType } from "@/utils/types";
@@ -38,35 +39,33 @@ export default async function Page({
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             History ({history.data?.length ?? "none"})
           </h2>
-          {history.data ? (
-            <ul>
-              {history.data.map((item: MusicType) => (
-                <li key={item.id}>
-                  {/* @ts-ignore */}
-                  {item.title} - {dayjs().to(dayjs(item.timestamp))}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>error: {history.error}</p>
-          )}
+          <div className="flex flex-col space-y-1">
+            {history.success ? (
+              history.data
+                ?.slice(0, 100)
+                .map((track: MusicType) => (
+                  <MusicCard key={track.id} music={track} />
+                ))
+            ) : (
+              <p>error: {history.error}</p>
+            )}
+          </div>
         </div>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             Favourites ({favourites.data?.length ?? "none"})
           </h2>
-          {favourites.data ? (
-            <ul>
-              {favourites.data.slice(0, 100).map((item: MusicType) => (
-                <li key={item.id}>
-                  {/* @ts-ignore */}
-                  {item.title} - {dayjs().to(dayjs(item.time_add))}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>error: {favourites.error}</p>
-          )}
+          <div className="flex flex-col space-y-1">
+            {favourites.success ? (
+              favourites.data
+                ?.slice(0, 100)
+                .map((track: MusicType) => (
+                  <MusicCard key={track.id} music={track} />
+                ))
+            ) : (
+              <p>error: {favourites.error}</p>
+            )}
+          </div>
         </div>
       </div>
     </main>
