@@ -1,110 +1,11 @@
-import { getUserFavoriteArtists } from "@/utils";
-import { musicSchema } from "@/utils/types";
+import getFavourites from "@/fetchers/getFavourites";
+import getHistory from "@/fetchers/getHistory";
+import { getTopTenArtists } from "@/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "stats | deezer-stats",
-};
-
-const getHistory = async (token?: string) => {
-  if (!token) {
-    return {
-      success: false,
-      error: "no token",
-    };
-  }
-
-  const url = new URL("https://api.deezer.com/user/me/history");
-  url.searchParams.set("access_token", token);
-
-  const response = await fetch(url);
-  const data = await response.json();
-  // console.log("data", JSON.stringify(data, null, 2));
-
-  if (data.error) {
-    console.error("error", data.error);
-    return {
-      success: false,
-      error: JSON.stringify(data.error),
-    };
-  }
-
-  if (!data || !data.data || !data.data.length) {
-    return {
-      success: true,
-      data: [],
-    };
-  }
-
-  let _data: any = [...data.data];
-
-  if (data.next) {
-    console.log("NEXT");
-    const response = await fetch(url);
-    const newData = await response.json();
-    _data = [..._data, ...newData.data];
-    if (newData.next) {
-      console.log("NEXT AGAIN");
-      const response = await fetch(url);
-      const newData = await response.json();
-      _data = [..._data, ...newData.data];
-      if (newData.next) {
-        console.log("NEXT AGAIN AGAIN");
-        const response = await fetch(url);
-        const newData = await response.json();
-        _data = [..._data, ...newData.data];
-      }
-    }
-  }
-
-  return {
-    success: true,
-    data: _data.flatMap((m: unknown) => {
-      const music = musicSchema.safeParse(m);
-      return music.success ? music.data : [];
-    }),
-  };
-};
-
-const getFavourites = async (token?: string) => {
-  if (!token) {
-    return {
-      success: false,
-      error: "no token",
-    };
-  }
-
-  const url = new URL("https://api.deezer.com/user/me/tracks");
-  url.searchParams.set("access_token", token);
-  url.searchParams.set("order", "DESC");
-
-  const response = await fetch(url);
-  const data = await response.json();
-  // console.log("data", JSON.stringify(data, null, 2));
-
-  if (data.error) {
-    console.error("error", data.error);
-    return {
-      success: false,
-      error: JSON.stringify(data.error),
-    };
-  }
-
-  if (!data || !data.data || !data.data.length) {
-    return {
-      success: true,
-      data: [],
-    };
-  }
-
-  return {
-    success: true,
-    data: data.data.flatMap((m: unknown) => {
-      const music = musicSchema.safeParse(m);
-      return music.success ? music.data : [];
-    }),
-  };
 };
 
 export default async function Page({
@@ -132,7 +33,7 @@ export default async function Page({
             History
           </h2>
           <ol>
-            {getUserFavoriteArtists(history.data ?? []).map((artist) => (
+            {getTopTenArtists(history.data ?? []).map((artist) => (
               <li key={artist.id}>
                 {artist.name} - {artist.playCount}
               </li>
@@ -158,7 +59,7 @@ export default async function Page({
             Favourites
           </h2>
           <ol>
-            {getUserFavoriteArtists(favourites.data ?? []).map((artist) => (
+            {getTopTenArtists(favourites.data ?? []).map((artist) => (
               <li key={artist.id}>
                 {artist.name} - {artist.playCount}
               </li>

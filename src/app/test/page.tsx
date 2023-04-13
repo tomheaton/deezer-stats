@@ -1,52 +1,28 @@
-import { getUserFavoriteArtists } from "@/utils";
-import { MusicType, musicSchema } from "@/utils/types";
+import getFavourites from "@/fetchers/getFavourites";
+import { getTopTenArtists } from "@/utils";
+import { MusicType } from "@/utils/types";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+const textSizes = [
+  // "text-xs",
+  "text-sm",
+  "text-base",
+  "text-lg",
+  "text-xl",
+  "text-2xl",
+  "text-3xl",
+  "text-4xl",
+  "text-5xl",
+  "text-6xl",
+  "text-7xl",
+  // "text-8xl",
+  // "text-9xl",
+].reverse();
+
 export const metadata: Metadata = {
   title: "test | deezer-stats",
-};
-
-const getFavourites = async (token?: string) => {
-  if (!token) {
-    return {
-      success: false,
-      error: "no token",
-    };
-  }
-
-  const url = new URL("https://api.deezer.com/user/me/tracks");
-  url.searchParams.set("access_token", token);
-  url.searchParams.set("limit", "100");
-  url.searchParams.set("order", "DESC");
-
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("data", JSON.stringify(data, null, 2));
-
-  if (data.error) {
-    console.error("error", data.error);
-    return {
-      success: false,
-      error: JSON.stringify(data.error),
-    };
-  }
-
-  if (!data || !data.data || !data.data.length) {
-    return {
-      success: true,
-      data: [],
-    };
-  }
-
-  return {
-    success: true,
-    data: data.data.flatMap((m: unknown) => {
-      const music = musicSchema.safeParse(m);
-      return music.success ? music.data : [];
-    }),
-  };
 };
 
 export default async function Page({
@@ -60,7 +36,7 @@ export default async function Page({
 
   const favourites = await getFavourites(token);
 
-  const topArtists = getUserFavoriteArtists(favourites.data ?? []);
+  const topArtists = getTopTenArtists(favourites.data ?? []);
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
@@ -103,8 +79,10 @@ export default async function Page({
           <div className="flex flex-col space-y-1">
             <ol>
               {topArtists.map((artist, index) => (
-                <li key={artist.id} className="text-lg">
-                  {index + 1}. {artist.name}
+                <li key={artist.id} className={`${textSizes[index]}`}>
+                  {/* <li key={artist.id} className="text-lg"> */}
+                  {/* {index + 1}. {artist.name} */}
+                  {artist.name}
                 </li>
               ))}
             </ol>

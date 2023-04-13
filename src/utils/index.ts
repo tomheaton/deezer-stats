@@ -8,7 +8,7 @@ export const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`;
 };
 
-export const getUserFavoriteArtists = (history: MusicType[]) => {
+export const getTopTenArtists = (history: MusicType[]) => {
   const artistMap: {
     [key: string]: {
       id: number;
