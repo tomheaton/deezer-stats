@@ -35,16 +35,11 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {history.success ? (
-              history.data?.slice(0, 100).map((track: Track) => (
-                <a
-                  href={track.link}
-                  key={track.id}
-                  target="_blank"
-                  rel="external noreferrer"
-                >
-                  <TrackCard music={track} />
-                </a>
-              ))
+              history.data
+                ?.slice(0, 100)
+                .map((track: Track) => (
+                  <TrackCard key={track.id} track={track} />
+                ))
             ) : (
               <p>error: {history.error}</p>
             )}
@@ -56,16 +51,11 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {favourites.success ? (
-              favourites.data?.slice(0, 100).map((track: Track) => (
-                <a
-                  href={track.link}
-                  key={track.id}
-                  target="_blank"
-                  rel="external noreferrer"
-                >
-                  <TrackCard music={track} />
-                </a>
-              ))
+              favourites.data
+                ?.slice(0, 100)
+                .map((track: Track) => (
+                  <TrackCard key={track.id} track={track} />
+                ))
             ) : (
               <p>error: {favourites.error}</p>
             )}

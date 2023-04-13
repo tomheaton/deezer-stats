@@ -1,6 +1,8 @@
 import MusicChart from "@/components/music_chart";
+import RangeSelector from "@/components/range_selector";
 import getHistory from "@/fetchers/getHistory";
 import { TEXT_SIZES, getTopTenArtists } from "@/utils";
+import type { Range } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -8,17 +10,20 @@ export const metadata: Metadata = {
   title: "history | deezer-stats",
 };
 
-// TODO: add range query
 export default async function Page({
   searchParams,
 }: {
   searchParams?: {
     token?: string;
+    range?: string;
   };
 }) {
-  const { token } = searchParams || {};
+  const { token, range } = searchParams || {};
 
-  const history = await getHistory(token);
+  const history = await getHistory(token, {
+    limit: 10_000,
+    range: range ? (range as Range) : "long_term",
+  });
 
   const topArtists = getTopTenArtists(history.data ?? []);
 
@@ -29,6 +34,7 @@ export default async function Page({
           deezer-stats
         </h1>
       </Link>
+      <RangeSelector />
       <div className={"flex w-full flex-wrap justify-evenly"}>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">

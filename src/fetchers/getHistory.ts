@@ -53,14 +53,14 @@ export default async function getHistory(
     };
   }
 
-  let musicData = allData.flatMap((m: unknown) => {
-    const music = trackSchema.safeParse(m);
-    return music.success ? music.data : [];
+  let trackData = allData.flatMap((t: unknown) => {
+    const track = trackSchema.safeParse(t);
+    return track.success ? track.data : [];
   });
 
   if (config?.range) {
     if (config.range === "short_term") {
-      musicData = musicData.filter((m) => {
+      trackData = trackData.filter((m) => {
         const date = new Date(m.time);
         const now = new Date();
         const diff = now.getTime() - date.getTime();
@@ -68,7 +68,7 @@ export default async function getHistory(
         return diffDays <= 28;
       });
     } else if (config.range === "medium_term") {
-      musicData = musicData.filter((m) => {
+      trackData = trackData.filter((m) => {
         const date = new Date(m.time);
         const now = new Date();
         const diff = now.getTime() - date.getTime();
@@ -80,6 +80,6 @@ export default async function getHistory(
 
   return {
     success: true,
-    data: musicData,
+    data: trackData,
   };
 }
