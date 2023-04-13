@@ -5,7 +5,6 @@ import type { MusicType } from "@/utils/types";
 import dayjs from "dayjs";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { useState } from "react";
 
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 
@@ -42,11 +41,16 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {history.success ? (
-              history.data
-                ?.slice(0, 100)
-                .map((track: MusicType) => (
-                  <MusicCard key={track.id} music={track} />
-                ))
+              history.data?.slice(0, 100).map((track: MusicType) => (
+                <a
+                  href={track.link}
+                  key={track.id}
+                  target="_blank"
+                  rel="external noreferrer"
+                >
+                  <MusicCard music={track} />
+                </a>
+              ))
             ) : (
               <p>error: {history.error}</p>
             )}
@@ -58,11 +62,16 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {favourites.success ? (
-              favourites.data
-                ?.slice(0, 100)
-                .map((track: MusicType) => (
-                  <MusicCard key={track.id} music={track} />
-                ))
+              favourites.data?.slice(0, 100).map((track: MusicType) => (
+                <a
+                  href={track.link}
+                  key={track.id}
+                  target="_blank"
+                  rel="external noreferrer"
+                >
+                  <MusicCard music={track} />
+                </a>
+              ))
             ) : (
               <p>error: {favourites.error}</p>
             )}

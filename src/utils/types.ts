@@ -8,6 +8,7 @@ export const musicSchema = z
     // title: z.number(),
     // title_short: z.string(),
     // title_version: z.string(),
+    link: z.string().url(),
     duration: z.number(),
     // rank: z.number(),
     // https://cdns-preview-6.dzcdn.net/stream/c-6430575d1f202af381f403b4752438af-6.mp3
