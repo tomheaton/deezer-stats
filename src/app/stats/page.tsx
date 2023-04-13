@@ -1,7 +1,7 @@
-import MusicCard from "@/components/music_card";
+import TrackCard from "@/components/track_card";
 import getFavourites from "@/fetchers/getFavourites";
 import getHistory from "@/fetchers/getHistory";
-import type { MusicType } from "@/utils/types";
+import type { Track } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -35,14 +35,14 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {history.success ? (
-              history.data?.slice(0, 100).map((track: MusicType) => (
+              history.data?.slice(0, 100).map((track: Track) => (
                 <a
                   href={track.link}
                   key={track.id}
                   target="_blank"
                   rel="external noreferrer"
                 >
-                  <MusicCard music={track} />
+                  <TrackCard music={track} />
                 </a>
               ))
             ) : (
@@ -56,14 +56,14 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {favourites.success ? (
-              favourites.data?.slice(0, 100).map((track: MusicType) => (
+              favourites.data?.slice(0, 100).map((track: Track) => (
                 <a
                   href={track.link}
                   key={track.id}
                   target="_blank"
                   rel="external noreferrer"
                 >
-                  <MusicCard music={track} />
+                  <TrackCard music={track} />
                 </a>
               ))
             ) : (

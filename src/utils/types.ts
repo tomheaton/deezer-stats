@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const musicSchema = z
+export const trackSchema = z
   .object({
     id: z.number(),
     type: z.string(),
@@ -43,6 +43,6 @@ export const musicSchema = z
     };
   });
 
-export type MusicType = z.infer<typeof musicSchema>;
+export type Track = z.infer<typeof trackSchema>;
 
 export type Range = "short_term" | "medium_term" | "long_term";

@@ -1,4 +1,4 @@
-import { musicSchema, type Range } from "@/utils/types";
+import { trackSchema, type Range } from "@/utils/types";
 
 export default async function getFavourites(
   token: string | undefined,
@@ -56,7 +56,7 @@ export default async function getFavourites(
 
   let musicData = allData
     .flatMap((m: unknown) => {
-      const music = musicSchema.safeParse(m);
+      const music = trackSchema.safeParse(m);
       return music.success ? music.data : [];
     })
     .reverse();

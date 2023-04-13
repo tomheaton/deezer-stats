@@ -1,4 +1,4 @@
-import type { MusicType } from "@/utils/types";
+import type { Track } from "@/utils/types";
 
 export const getBaseUrl = () => {
   if (typeof window !== "undefined") return "";
@@ -8,7 +8,7 @@ export const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`;
 };
 
-export const getTopTenArtists = (tracks: MusicType[]) => {
+export const getTopTenArtists = (tracks: Track[]) => {
   const artistMap: {
     [key: string]: {
       id: number;

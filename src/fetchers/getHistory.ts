@@ -1,4 +1,4 @@
-import { musicSchema, type Range } from "@/utils/types";
+import { trackSchema, type Range } from "@/utils/types";
 
 export default async function getHistory(
   token?: string,
@@ -54,7 +54,7 @@ export default async function getHistory(
   }
 
   let musicData = allData.flatMap((m: unknown) => {
-    const music = musicSchema.safeParse(m);
+    const music = trackSchema.safeParse(m);
     return music.success ? music.data : [];
   });
 

@@ -1,14 +1,14 @@
-import type { MusicType } from "@/utils/types";
+import type { Track } from "@/utils/types";
 import dayjs from "dayjs";
 import Image from "next/image";
 
 dayjs.extend(require("dayjs/plugin/relativeTime"));
 
 type Props = {
-  music: MusicType;
+  track: Track;
 };
 
-export default function MusicCard({ music: track }: Props) {
+export default function TrackCard({ track }: Props) {
   return (
     <div className="flex items-center space-x-2 rounded-lg border-2 border-purple-400 p-4 transition-all hover:scale-105">
       <Image
