@@ -48,7 +48,7 @@ export default async function Page({
       <div className={"flex w-full flex-wrap-reverse justify-evenly"}>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">
-            Favourite Tracks ({favourites.data?.length ?? 0})
+            Favourite Tracks ({favourites.data?.length ?? "none"})
           </h2>
           <div className="flex flex-col space-y-1">
             {favourites.success &&
@@ -78,11 +78,14 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             <ol>
-              {topArtists.map((artist, index) => (
+              {/* {topArtists.map((artist, index) => (
                 <li key={artist.id} className={`${textSizes[index]}`}>
-                  {/* <li key={artist.id} className="text-lg"> */}
-                  {/* {index + 1}. {artist.name} */}
                   {artist.name}
+                </li>
+              ))} */}
+              {topArtists.map((artist, index) => (
+                <li key={artist.id} className="text-lg">
+                  {index + 1}. {artist.name}
                 </li>
               ))}
             </ol>
