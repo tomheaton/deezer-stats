@@ -21,17 +21,27 @@ export const musicSchema = z
       cover_xl: z.string().url(),
       title: z.string(),
     }),
-    // TODO: fix these
     // timestamp for /history
     timestamp: z.number().optional(),
     // time_add for /tracks
     time_add: z.number().optional(),
   })
-  .transform((m) => ({
-    ...m,
-    timestamp: m.timestamp ? new Date(m.timestamp * 1000) : Date.now(),
-    time_add: m.time_add ? new Date(m.time_add * 1000) : Date.now(),
-  }));
+  .transform((m) => {
+    let time: Date;
+
+    if (m.timestamp) {
+      time = new Date(m.timestamp * 1000);
+    } else if (m.time_add) {
+      time = new Date(m.time_add * 1000);
+    } else {
+      time = new Date();
+    }
+
+    return {
+      ...m,
+      time: time,
+    };
+  });
 
 export type MusicType = z.infer<typeof musicSchema>;
 

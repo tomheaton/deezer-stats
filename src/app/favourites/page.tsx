@@ -1,26 +1,10 @@
 import MusicChart from "@/components/music_chart";
 import RangeSelector from "@/components/range_selector";
-import getFavouritesAll from "@/fetchers/getFavouritesAll";
-import { getTopTenArtists } from "@/utils";
+import getFavourites from "@/fetchers/getFavourites";
+import { TEXT_SIZES, getTopTenArtists } from "@/utils";
 import type { Range } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
-
-const textSizes = [
-  // "text-xs",
-  "text-sm",
-  "text-base",
-  "text-lg",
-  "text-xl",
-  "text-2xl",
-  "text-3xl",
-  "text-4xl",
-  "text-5xl",
-  "text-6xl",
-  "text-7xl",
-  // "text-8xl",
-  // "text-9xl",
-].reverse();
 
 export const metadata: Metadata = {
   title: "favourites | deezer-stats",
@@ -36,8 +20,7 @@ export default async function Page({
 }) {
   const { token, range } = searchParams || {};
 
-  // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, {
+  const favourites = await getFavourites(token, {
     limit: 10_000,
     range: range ? (range as Range) : "long_term",
   });
@@ -62,14 +45,6 @@ export default async function Page({
             label={"Play Count"}
             data={topArtists.map((a) => a.playCount)}
           />
-          {/* <div className="flex flex-col space-y-1">
-            {favourites.success &&
-              favourites.data
-                ?.slice(0, 100)
-                .map((track: MusicType) => (
-                  <MusicCard key={track.id} music={track} />
-                ))}
-          </div> */}
         </div>
         <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-bold tracking-tighter">
@@ -80,16 +55,11 @@ export default async function Page({
               {topArtists.map((artist, index) => (
                 <li
                   key={artist.id}
-                  className={`${textSizes[index]} text-center`}
+                  className={`${TEXT_SIZES[index]} text-center`}
                 >
                   {artist.name}
                 </li>
               ))}
-              {/* {topArtists.map((artist, index) => (
-                <li key={artist.id} className="text-lg">
-                  {index + 1}. {artist.name}
-                </li>
-              ))} */}
             </ol>
           </div>
         </div>

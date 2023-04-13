@@ -1,13 +1,14 @@
 "use client";
 
+import type { Range } from "@/utils/types";
 import type { Route } from "next";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-const ranges: { key: string; text: string }[] = [
-  { key: "short_term", text: "4 Weeks" },
-  { key: "medium_term", text: "6 Months" },
-  { key: "long_term", text: "All Time" },
+const ranges: { value: Range; text: string }[] = [
+  { value: "short_term", text: "4 Weeks" },
+  { value: "medium_term", text: "6 Months" },
+  { value: "long_term", text: "All Time" },
 ];
 
 type Props = {};
@@ -28,13 +29,15 @@ export default function RangeSelector({}: Props) {
   );
 
   return (
-    <div className="space-x-2">
+    <div className="my-2 space-x-2">
       {ranges.map((range) => (
         <button
-          key={range.key}
+          key={range.value}
           onClick={() => {
             router.push(
-              (pathname + "?" + createQueryString("range", range.key)) as Route,
+              (pathname +
+                "?" +
+                createQueryString("range", range.value)) as Route,
             );
           }}
           className="btn"

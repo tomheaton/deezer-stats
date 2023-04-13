@@ -1,5 +1,8 @@
 import type { MusicType } from "@/utils/types";
+import dayjs from "dayjs";
 import Image from "next/image";
+
+dayjs.extend(require("dayjs/plugin/relativeTime"));
 
 type Props = {
   music: MusicType;
@@ -17,9 +20,9 @@ export default function MusicCard({ music: track }: Props) {
       />
       <div>
         <p className="font-bold tracking-tight">{track.title}</p>
-        <p className="text-sm">{track.artist.name}</p>
+        <p className="text-base">{track.artist.name}</p>
         {/* @ts-ignore */}
-        {/* <p>{dayjs().to(dayjs(item.time_add))}</p> */}
+        <p className="text-sm italic">{dayjs().to(dayjs(track.time))}</p>
       </div>
     </div>
   );

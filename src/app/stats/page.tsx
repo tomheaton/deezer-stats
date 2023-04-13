@@ -1,12 +1,9 @@
 import MusicCard from "@/components/music_card";
-import getFavouritesAll from "@/fetchers/getFavouritesAll";
-import getHistoryAll from "@/fetchers/getHistoryAll";
+import getFavourites from "@/fetchers/getFavourites";
+import getHistory from "@/fetchers/getHistory";
 import type { MusicType } from "@/utils/types";
-import dayjs from "dayjs";
 import type { Metadata } from "next";
 import Link from "next/link";
-
-dayjs.extend(require("dayjs/plugin/relativeTime"));
 
 export const metadata: Metadata = {
   title: "stats | deezer-stats",
@@ -21,11 +18,8 @@ export default async function Page({
 }) {
   const { token } = searchParams || {};
 
-  // const history = await getHistory(token);
-  const history = await getHistoryAll(token);
-
-  // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, { limit: 1_000 });
+  const history = await getHistory(token);
+  const favourites = await getFavourites(token);
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">

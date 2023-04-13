@@ -8,7 +8,7 @@ export const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`;
 };
 
-export const getTopTenArtists = (history: MusicType[]) => {
+export const getTopTenArtists = (tracks: MusicType[]) => {
   const artistMap: {
     [key: string]: {
       id: number;
@@ -17,7 +17,7 @@ export const getTopTenArtists = (history: MusicType[]) => {
     };
   } = {};
 
-  history.forEach((track) => {
+  tracks.forEach((track) => {
     const artistId = track.artist.id;
     const artistName = track.artist.name;
 
@@ -38,3 +38,19 @@ export const getTopTenArtists = (history: MusicType[]) => {
 
   return sortedArtists.slice(0, 10);
 };
+
+export const TEXT_SIZES = [
+  "text-xs",
+  "text-sm",
+  "text-base",
+  "text-lg",
+  "text-xl",
+  "text-2xl",
+  "text-3xl",
+  "text-4xl",
+  "text-5xl",
+  "text-6xl",
+  // "text-7xl",
+  // "text-8xl",
+  // "text-9xl",
+].reverse();

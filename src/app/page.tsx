@@ -8,7 +8,7 @@ export default async function Page() {
       </h1>
       <p className="leading-tight">view your deezer stats</p>
       <br />
-      <Link href="/connect">
+      <Link href="/api/connect">
         <button className="btn">Login with Deezer</button>
       </Link>
     </main>
