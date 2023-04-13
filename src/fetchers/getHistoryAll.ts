@@ -50,6 +50,13 @@ export default async function getHistoryAll(
   // console.log("data:", allData);
   console.log("length:", allData.length);
 
+  if (!data || !allData) {
+    return {
+      success: true,
+      data: [],
+    };
+  }
+
   return {
     success: true,
     data: allData.flatMap((m: unknown) => {

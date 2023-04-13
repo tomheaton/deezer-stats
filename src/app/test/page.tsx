@@ -1,4 +1,4 @@
-import getFavourites from "@/fetchers/getFavourites";
+import getFavouritesAll from "@/fetchers/getFavouritesAll";
 import { getTopTenArtists } from "@/utils";
 import { MusicType } from "@/utils/types";
 import type { Metadata } from "next";
@@ -34,7 +34,8 @@ export default async function Page({
 }) {
   const { token } = searchParams || {};
 
-  const favourites = await getFavourites(token);
+  // const favourites = await getFavourites(token);
+  const favourites = await getFavouritesAll(token, 10_000);
 
   const topArtists = getTopTenArtists(favourites.data ?? []);
 
@@ -52,7 +53,7 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             {favourites.success &&
-              favourites.data.map((track: MusicType) => (
+              favourites.data?.slice(0, 100).map((track: MusicType) => (
                 <div
                   key={track.id}
                   className="flex items-center space-x-2 rounded-lg border-2 border-purple-400 p-4 transition-all hover:scale-105"
@@ -78,16 +79,16 @@ export default async function Page({
           </h2>
           <div className="flex flex-col space-y-1">
             <ol>
-              {/* {topArtists.map((artist, index) => (
+              {topArtists.map((artist, index) => (
                 <li key={artist.id} className={`${textSizes[index]}`}>
                   {artist.name}
                 </li>
-              ))} */}
-              {topArtists.map((artist, index) => (
+              ))}
+              {/* {topArtists.map((artist, index) => (
                 <li key={artist.id} className="text-lg">
                   {index + 1}. {artist.name}
                 </li>
-              ))}
+              ))} */}
             </ol>
           </div>
         </div>

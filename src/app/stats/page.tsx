@@ -24,7 +24,7 @@ export default async function Page({
   const history = await getHistoryAll(token);
 
   // const favourites = await getFavourites(token);
-  const favourites = await getFavouritesAll(token, 10000);
+  const favourites = await getFavouritesAll(token, 10_000);
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
@@ -33,8 +33,8 @@ export default async function Page({
           deezer-stats
         </h1>
       </Link>
-      <div className={"flex w-full justify-evenly"}>
-        <div className="w-1/3">
+      <div className={"flex w-full flex-wrap-reverse justify-evenly"}>
+        <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             History ({history.data?.length ?? "none"})
           </h2>
@@ -51,21 +51,18 @@ export default async function Page({
             <p>error: {history.error}</p>
           )}
         </div>
-        <div className="w-1/3">
+        <div className="w-full p-4 md:w-1/3">
           <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
             Favourites ({favourites.data?.length ?? "none"})
           </h2>
           {favourites.data ? (
             <ul>
-              {favourites.data
-                .reverse()
-                .slice(0, 100)
-                .map((item: MusicType) => (
-                  <li key={item.id}>
-                    {/* @ts-ignore */}
-                    {item.title} - {dayjs().to(dayjs(item.time_add))}
-                  </li>
-                ))}
+              {favourites.data.slice(0, 100).map((item: MusicType) => (
+                <li key={item.id}>
+                  {/* @ts-ignore */}
+                  {item.title} - {dayjs().to(dayjs(item.time_add))}
+                </li>
+              ))}
             </ul>
           ) : (
             <p>error: {favourites.error}</p>

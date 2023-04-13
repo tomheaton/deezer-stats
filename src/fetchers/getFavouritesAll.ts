@@ -50,11 +50,20 @@ export default async function getFavouritesAll(
   // console.log("data:", allData);
   console.log("length:", allData.length);
 
+  if (!data || !allData) {
+    return {
+      success: true,
+      data: [],
+    };
+  }
+
   return {
     success: true,
-    data: allData.flatMap((m: unknown) => {
-      const music = musicSchema.safeParse(m);
-      return music.success ? music.data : [];
-    }),
+    data: allData
+      .flatMap((m: unknown) => {
+        const music = musicSchema.safeParse(m);
+        return music.success ? music.data : [];
+      })
+      .reverse(),
   };
 }
