@@ -1,4 +1,3 @@
-import { getBaseUrl } from "@/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -43,7 +42,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect("/", 302);
   }
 
-  const redirectUrl = new URL(`${getBaseUrl()}/home`);
+  const redirectUrl = new URL(`${process.env.APP_URL}/home`);
 
   redirectUrl.searchParams.append("token", paramsObject.access_token);
 
