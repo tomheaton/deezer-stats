@@ -22,7 +22,7 @@ export default async function Page({
   const { token, range } = searchParams || {};
 
   if (!token) {
-    console.log("no token found (favourites)")
+    console.log("no token found (favourites)");
     return redirect("/");
   }
 

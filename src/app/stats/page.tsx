@@ -20,8 +20,8 @@ export default async function Page({
   const { token } = searchParams || {};
 
   if (!token) {
-    console.log("no token found (stats)")
-    redirect("/")
+    console.log("no token found (stats)");
+    redirect("/");
   }
 
   const history = await getHistory(token);
