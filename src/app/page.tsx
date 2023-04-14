@@ -6,9 +6,7 @@ export default async function Page() {
       <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
         Deezer Stats
       </h1>
-      <p className="mb-2 text-center text-lg font-semibold leading-tight">
-        Welcome to Deezer Stats!
-        <br />
+      <p className="text-center text-lg font-semibold leading-tight">
         Authenticate with Deezer below.
       </p>
       <br />

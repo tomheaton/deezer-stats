@@ -4,6 +4,7 @@ import getHistory from "@/fetchers/getHistory";
 import type { Track } from "@/utils/types";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Stats | Deezer Stats",
@@ -18,12 +19,17 @@ export default async function Page({
 }) {
   const { token } = searchParams || {};
 
+  if (!token) {
+    console.log("no token found (stats)")
+    redirect("/")
+  }
+
   const history = await getHistory(token);
   const favourites = await getFavourites(token);
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
-      <Link href="/">
+      <Link href="/home">
         <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
           Deezer Stats
         </h1>

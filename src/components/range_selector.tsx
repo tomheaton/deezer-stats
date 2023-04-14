@@ -31,12 +31,11 @@ export default function RangeSelector() {
       {ranges.map((range) => (
         <Link
           key={range.value}
-          className="btn"
           href={
             (pathname + "?" + createQueryString("range", range.value)) as Route
           }
         >
-          {range.text}
+          <button className="btn">{range.text}</button>
         </Link>
       ))}
     </div>

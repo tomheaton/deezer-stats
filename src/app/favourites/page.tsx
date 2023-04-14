@@ -1,10 +1,11 @@
+import Header from "@/components/header";
 import MusicChart from "@/components/music_chart";
 import RangeSelector from "@/components/range_selector";
 import getFavourites from "@/fetchers/getFavourites";
 import { TEXT_SIZES, getTopTenArtists } from "@/utils";
 import type { Range } from "@/utils/types";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Favourites | Deezer Stats",
@@ -20,6 +21,11 @@ export default async function Page({
 }) {
   const { token, range } = searchParams || {};
 
+  if (!token) {
+    console.log("no token found (favourites)")
+    return redirect("/");
+  }
+
   const favourites = await getFavourites(token, {
     limit: 10_000,
     range: range ? (range as Range) : "long_term",
@@ -29,11 +35,12 @@ export default async function Page({
 
   return (
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
-      <Link href="/">
+      {/* <Link href="/home">
         <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
           Deezer Stats
         </h1>
-      </Link>
+      </Link> */}
+      <Header pathname="/home" token={token} />
       <RangeSelector />
       <div className={"flex w-full flex-wrap justify-evenly"}>
         <div className="w-full p-4 md:w-1/3">
