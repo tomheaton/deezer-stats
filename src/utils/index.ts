@@ -40,17 +40,17 @@ export const getTopTenArtists = (tracks: Track[]) => {
 };
 
 export const TEXT_SIZES = [
-  "text-xs",
-  "text-sm",
-  "text-base",
-  "text-lg",
-  "text-xl",
-  "text-2xl",
-  "text-3xl",
-  "text-4xl",
-  "text-5xl",
+  "text-9xl",
+  "text-8xl",
+  "text-7xl",
   "text-6xl",
-  // "text-7xl",
-  // "text-8xl",
-  // "text-9xl",
-].reverse();
+  "text-5xl",
+  "text-4xl",
+  "text-3xl",
+  "text-2xl",
+  "text-xl",
+  "text-lg",
+  "text-base",
+  "text-sm",
+  "text-xs",
+];

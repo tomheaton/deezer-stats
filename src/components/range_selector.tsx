@@ -2,7 +2,8 @@
 
 import type { Range } from "@/utils/types";
 import type { Route } from "next";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
 const ranges: { value: Range; text: string }[] = [
@@ -11,10 +12,7 @@ const ranges: { value: Range; text: string }[] = [
   { value: "long_term", text: "All Time" },
 ];
 
-type Props = {};
-
-export default function RangeSelector({}: Props) {
-  const router = useRouter();
+export default function RangeSelector() {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 
@@ -31,19 +29,15 @@ export default function RangeSelector({}: Props) {
   return (
     <div className="my-2 space-x-2">
       {ranges.map((range) => (
-        <button
+        <Link
           key={range.value}
-          onClick={() => {
-            router.push(
-              (pathname +
-                "?" +
-                createQueryString("range", range.value)) as Route,
-            );
-          }}
           className="btn"
+          href={
+            (pathname + "?" + createQueryString("range", range.value)) as Route
+          }
         >
           {range.text}
-        </button>
+        </Link>
       ))}
     </div>
   );

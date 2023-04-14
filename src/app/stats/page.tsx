@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "stats | deezer-stats",
+  title: "Stats | Deezer Stats",
 };
 
 export default async function Page({
@@ -25,7 +25,7 @@ export default async function Page({
     <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
       <Link href="/">
         <h1 className="mb-2 text-5xl font-extrabold tracking-tighter">
-          deezer-stats
+          Deezer Stats
         </h1>
       </Link>
       <div className={"flex w-full flex-wrap-reverse justify-evenly"}>
@@ -41,7 +41,7 @@ export default async function Page({
                   <TrackCard key={track.id} track={track} />
                 ))
             ) : (
-              <p>error: {history.error}</p>
+              <p>Error: {history.error}</p>
             )}
           </div>
         </div>
@@ -57,7 +57,7 @@ export default async function Page({
                   <TrackCard key={track.id} track={track} />
                 ))
             ) : (
-              <p>error: {favourites.error}</p>
+              <p>Error: {favourites.error}</p>
             )}
           </div>
         </div>

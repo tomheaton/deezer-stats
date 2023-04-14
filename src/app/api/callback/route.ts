@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect("/", 302);
   }
 
-  const redirectUrl = new URL(`${getBaseUrl()}/stats`);
+  const redirectUrl = new URL(`${getBaseUrl()}/home`);
 
   redirectUrl.searchParams.append("token", paramsObject.access_token);
 
