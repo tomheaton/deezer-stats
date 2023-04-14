@@ -1,19 +1,12 @@
 import { trackSchema, type Range } from "@/utils/types";
 
 export default async function getFavourites(
-  token: string | undefined,
+  token: string,
   config?: {
     limit?: number;
     range?: Range;
   },
 ) {
-  if (!token) {
-    return {
-      success: false,
-      error: "no token",
-    };
-  }
-
   let nextUrl = new URL("https://api.deezer.com/user/me/tracks");
   nextUrl.searchParams.set("access_token", token);
 
@@ -21,19 +14,15 @@ export default async function getFavourites(
 
   let response = await fetch(nextUrl);
   let data = await response.json();
-  // console.log("data", data);
 
   allData = allData.concat(data.data);
   nextUrl = data.next;
 
   let count = 0;
 
-  // loop to fetch and append subsequent sets of data until there is no more data to retrieve
   while (nextUrl) {
     count = count + 1;
-    // console.log("nextUrl", nextUrl);
     if (allData.length >= (config?.limit ?? 100)) {
-      // console.log("limit reached");
       break;
     }
     let response = await fetch(nextUrl);
@@ -42,10 +31,6 @@ export default async function getFavourites(
     allData = allData.concat(data.data);
     nextUrl = data.next;
   }
-
-  // console.log("count:", count);
-  // console.log("data:", allData);
-  // console.log("length:", allData.length);
 
   if (!data || !allData) {
     return {

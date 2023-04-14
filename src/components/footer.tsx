@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="container mx-auto flex items-center justify-center space-x-2 p-4">
       <p className="text-center">
-        made with ❤️ by{" "}
+        Made with ❤️ by{" "}
         <a
           href="https://tomheaton.dev"
           target="_blank"

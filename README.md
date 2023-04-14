@@ -1,3 +1,3 @@
 # deezer-stats
 
-view your deezer stats
+View your Deezer music stats!

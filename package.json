@@ -1,6 +1,6 @@
 {
   "name": "deezer-stats",
-  "description": "view your deezer stats",
+  "description": "View your Deezer music stats!",
   "version": "1.0.0",
   "private": true,
   "scripts": {
