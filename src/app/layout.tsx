@@ -1,5 +1,6 @@
-import Footer from "@/components/footer";
 import "@/styles/globals.css";
+
+import Footer from "@/components/footer";
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 

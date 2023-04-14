@@ -55,7 +55,7 @@ export default async function Page({
               {topArtists.map((artist, index) => (
                 <li
                   key={artist.id}
-                  className={`${TEXT_SIZES[index]} text-center`}
+                  className={`text-center ${TEXT_SIZES[index]}`}
                 >
                   {artist.name}
                 </li>
