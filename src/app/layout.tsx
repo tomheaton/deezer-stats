@@ -6,7 +6,25 @@ import type { PropsWithChildren } from "react";
 export const metadata: Metadata = {
   metadataBase: new URL("https://deezer-stats.tomheaton.dev"),
   title: "deezer-stats",
-  description: "deezer-stats",
+  description: "View your Deezer music stats!",
+  authors: {
+    name: "Tom Heaton",
+    url: "https://tomheaton.dev",
+  },
+  twitter: {
+    title: "deezer-stats",
+    description: "View your Deezer music stats!",
+    card: "summary",
+    creator: "@tomheaton_",
+  },
+  openGraph: {
+    title: "deezer-stats",
+    description: "View your Deezer music stats!",
+    type: "website",
+    url: "https://deezer-stats.tomheaton.dev",
+    locale: "en_GB",
+    siteName: "deezer-stats",
+  },
   keywords:
     "deezer stats, deezer, stats, music, history, favourites, top artists, top tracks",
   themeColor: "#a855f7",
