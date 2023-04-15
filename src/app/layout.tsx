@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   keywords:
     "deezer stats, deezer, stats, music, history, favourites, top artists, top tracks",
   themeColor: "#a855f7",
-  // viewport: "width=device-width, initial-scale=1",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
