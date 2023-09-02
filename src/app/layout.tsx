@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 
 import Footer from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       <body>
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
