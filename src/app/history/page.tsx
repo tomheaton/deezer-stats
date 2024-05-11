@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "History | Deezer Stats",
+  title: "History",
 };
 
 export default async function Page({

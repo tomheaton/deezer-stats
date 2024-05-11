@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "Home | Deezer Stats",
+  title: "Home",
 };
 
 export default async function Page({

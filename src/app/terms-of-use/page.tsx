@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | Deezer Stats",
+  title: "Terms of Use",
 };
 
 export default async function Page() {

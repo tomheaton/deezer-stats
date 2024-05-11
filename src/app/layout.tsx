@@ -2,12 +2,15 @@ import "@/styles/globals.css";
 
 import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://deezer-stats.tomheaton.dev"),
-  title: "Deezer Stats",
+  title: {
+    template: "%s | Deezer Stats",
+    default: "Deezer Stats",
+  },
   description: "View your Deezer music stats!",
   authors: {
     name: "Tom Heaton",
@@ -29,8 +32,13 @@ export const metadata: Metadata = {
   },
   keywords:
     "deezer stats, deezer, stats, music, history, favourites, top artists, top tracks",
+};
+
+export const viewport: Viewport = {
+  height: "device-height",
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#a855f7",
-  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
