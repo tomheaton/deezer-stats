@@ -1,7 +1,6 @@
 "use client";
 
 import type { Range } from "@/utils/types";
-import type { Route } from "next";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
@@ -27,13 +26,11 @@ export function RangeSelector() {
   );
 
   return (
-    <div className="my-2 space-x-2">
+    <div className="my-2 space-x-4">
       {ranges.map((range) => (
         <Link
           key={range.value}
-          href={
-            (pathname + "?" + createQueryString("range", range.value)) as Route
-          }
+          href={`${pathname}?${createQueryString("range", range.value)}`}
         >
           <button className="btn">{range.text}</button>
         </Link>

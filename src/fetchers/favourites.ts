@@ -18,13 +18,11 @@ export async function getFavourites(
   allData = allData.concat(data.data);
   nextUrl = data.next;
 
-  let count = 0;
-
   while (nextUrl) {
-    count = count + 1;
     if (allData.length >= (config?.limit ?? 100)) {
       break;
     }
+
     const response = await fetch(nextUrl);
     const data = await response.json();
 

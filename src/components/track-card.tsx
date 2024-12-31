@@ -8,7 +8,7 @@ dayjs.extend(relativeTime);
 export function TrackCard({ track }: { track: Track }) {
   return (
     <a href={track.link} target="_blank" rel="external noreferrer">
-      <div className="flex items-center space-x-2 rounded-lg border-2 border-purple-400 p-4 transition-all hover:scale-105 active:scale-95">
+      <div className="flex items-center space-x-4 rounded-lg border-2 border-deezer-purple p-4 transition-all hover:scale-105 active:scale-95">
         <Image
           src={track.album.cover_xl}
           alt={track.album.title}

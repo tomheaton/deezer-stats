@@ -9,7 +9,7 @@ export function Footer() {
           href="https://tomheaton.dev"
           target="_blank"
           rel="me external noreferrer"
-          className="transition-colors hover:text-violet-500"
+          className="transition-colors hover:text-deezer-purple"
         >
           Tom Heaton
         </a>{" "}

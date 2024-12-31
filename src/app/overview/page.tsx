@@ -35,7 +35,7 @@ export default async function Page(props: {
             <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
               History ({history.data?.length.toLocaleString() ?? "none"})
             </h2>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-2">
               {history.data ? (
                 history.data
                   ?.slice(0, 100)
@@ -51,7 +51,7 @@ export default async function Page(props: {
             <h2 className="mb-2 text-2xl font-extrabold tracking-tighter">
               Favourites ({favourites.data?.length.toLocaleString() ?? "none"})
             </h2>
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-2">
               {favourites.success ? (
                 favourites.data
                   ?.slice(0, 100)

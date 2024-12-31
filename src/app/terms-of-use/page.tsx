@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   return (
-    <main className="container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
+    <main className="gap-y-4 container mx-auto flex min-h-screen flex-col items-center justify-center py-8">
       <Link href="/">
-        <h1 className="mb-2 text-5xl font-extrabold tracking-tighter transition-all hover:scale-105 active:scale-95">
+        <h1 className="leading-none text-5xl font-extrabold tracking-tighter transition-all hover:scale-105 active:scale-95">
           Terms of Use
         </h1>
       </Link>
