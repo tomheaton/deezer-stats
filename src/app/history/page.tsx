@@ -26,7 +26,6 @@ export default async function Page(props: {
   }
 
   const history = await getHistory(token, {
-    limit: 10_000,
     range: range ? (range as Range) : "long_term",
   });
 

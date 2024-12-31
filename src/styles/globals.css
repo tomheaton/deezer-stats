@@ -26,6 +26,14 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+*::selection {
+  @apply bg-deezer-purple;
+}
+
+*::-moz-selection {
+  @apply bg-deezer-purple;
+}
+
 .btn {
   @apply rounded-lg bg-deezer-purple px-4 py-2 font-bold text-white transition-all hover:scale-105 hover:brightness-90 active:scale-95;
 }
