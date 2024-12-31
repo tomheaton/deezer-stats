@@ -12,14 +12,13 @@ export const metadata: Metadata = {
   title: "History",
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     token?: string;
     range?: string;
-  };
+  }>;
 }) {
+  const searchParams = await props.searchParams;
   const { token, range } = searchParams || {};
 
   if (!token) {
@@ -31,7 +30,7 @@ export default async function Page({
     range: range ? (range as Range) : "long_term",
   });
 
-  const topArtists = getTopTenArtists(history.data ?? []);
+  const topArtists = getTopTenArtists(history.data);
 
   return (
     <Suspense fallback={<p>loading...</p>}>

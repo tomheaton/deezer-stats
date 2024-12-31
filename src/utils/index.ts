@@ -1,13 +1,14 @@
 import type { Track } from "@/utils/types";
 
-export const getTopTenArtists = (tracks: Track[]) => {
-  const artistMap: {
-    [key: string]: {
+export function getTopTenArtists(tracks: Track[]) {
+  const artistMap: Record<
+    string,
+    {
       id: number;
       name: string;
       playCount: number;
-    };
-  } = {};
+    }
+  > = {};
 
   tracks.forEach((track) => {
     const artistId = track.artist.id;
@@ -29,7 +30,7 @@ export const getTopTenArtists = (tracks: Track[]) => {
   );
 
   return sortedArtists.slice(0, 10);
-};
+}
 
 export const TEXT_SIZES = [
   // "text-9xl",
@@ -45,4 +46,4 @@ export const TEXT_SIZES = [
   "text-base",
   "text-sm",
   "text-xs",
-];
+] as const;

@@ -11,17 +11,16 @@ export const metadata: Metadata = {
   title: "Overview",
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     token?: string;
-  };
+  }>;
 }) {
+  const searchParams = await props.searchParams;
   const { token } = searchParams || {};
 
   if (!token) {
-    redirect("/");
+    return redirect("/");
   }
 
   const history = await getHistory(token);

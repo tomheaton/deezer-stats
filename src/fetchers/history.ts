@@ -10,10 +10,10 @@ export async function getHistory(
   let nextUrl = new URL("https://api.deezer.com/user/me/history");
   nextUrl.searchParams.set("access_token", token);
 
-  let allData: any[] = [];
+  let allData: unknown[] = [];
 
-  let response = await fetch(nextUrl);
-  let data = await response.json();
+  const response = await fetch(nextUrl);
+  const data = await response.json();
 
   allData = allData.concat(data.data);
   nextUrl = data.next;
@@ -25,8 +25,8 @@ export async function getHistory(
     if (allData.length >= (config?.limit ?? 100)) {
       break;
     }
-    let response = await fetch(nextUrl);
-    let data = await response.json();
+    const response = await fetch(nextUrl);
+    const data = await response.json();
 
     allData = allData.concat(data.data);
     nextUrl = data.next;
@@ -39,7 +39,7 @@ export async function getHistory(
     };
   }
 
-  let trackData = allData.flatMap((t: unknown) => {
+  let trackData = allData.flatMap((t) => {
     const track = trackSchema.safeParse(t);
     return track.success ? track.data : [];
   });

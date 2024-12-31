@@ -12,14 +12,13 @@ export const metadata: Metadata = {
   title: "Favourites",
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     token?: string;
     range?: string;
-  };
+  }>;
 }) {
+  const searchParams = await props.searchParams;
   const { token, range } = searchParams || {};
 
   if (!token) {
@@ -31,7 +30,7 @@ export default async function Page({
     range: range ? (range as Range) : "long_term",
   });
 
-  const topArtists = getTopTenArtists(favourites.data ?? []);
+  const topArtists = getTopTenArtists(favourites.data);
 
   return (
     <Suspense fallback={<p>loading...</p>}>

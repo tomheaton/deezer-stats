@@ -25,7 +25,7 @@ export function Header({
   );
 
   return (
-    <Link href={(pathname + "?" + createQueryString("token", token)) as Route}>
+    <Link href={pathname + "?" + createQueryString("token", token)}>
       <h1 className="mb-2 text-5xl font-extrabold tracking-tighter transition-all hover:scale-105 active:scale-95">
         Deezer Stats
       </h1>

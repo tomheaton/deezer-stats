@@ -6,17 +6,16 @@ export const metadata: Metadata = {
   title: "Home",
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     token?: string;
-  };
+  }>;
 }) {
+  const searchParams = await props.searchParams;
   const { token } = searchParams || {};
 
   if (!token) {
-    redirect("/");
+    return redirect("/");
   }
 
   return (
