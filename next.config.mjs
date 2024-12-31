@@ -1,13 +1,13 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "e-cdns-images.dzcdn.net",
+        hostname: "cdn-images.dzcdn.net",
       },
     ],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
