@@ -10,9 +10,9 @@ const ranges: { value: Range; text: string }[] = [
   { value: "short_term", text: "4 Weeks" },
   { value: "medium_term", text: "6 Months" },
   { value: "long_term", text: "All Time" },
-];
+] as const;
 
-export default function RangeSelector() {
+export function RangeSelector() {
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
 

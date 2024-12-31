@@ -1,7 +1,7 @@
-import Header from "@/components/header";
-import TrackCard from "@/components/track_card";
-import getFavourites from "@/fetchers/getFavourites";
-import getHistory from "@/fetchers/getHistory";
+import { Header } from "@/components/header";
+import { TrackCard } from "@/components/track-card";
+import { getFavourites } from "@/fetchers/favourites";
+import { getHistory } from "@/fetchers/history";
 import type { Track } from "@/utils/types";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";

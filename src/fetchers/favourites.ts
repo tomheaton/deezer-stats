@@ -1,13 +1,13 @@
 import { trackSchema, type Range } from "@/utils/types";
 
-export default async function getHistory(
+export async function getFavourites(
   token: string,
   config?: {
     limit?: number;
     range?: Range;
   },
 ) {
-  let nextUrl = new URL("https://api.deezer.com/user/me/history");
+  let nextUrl = new URL("https://api.deezer.com/user/me/tracks");
   nextUrl.searchParams.set("access_token", token);
 
   let allData: any[] = [];
@@ -39,10 +39,12 @@ export default async function getHistory(
     };
   }
 
-  let trackData = allData.flatMap((t: unknown) => {
-    const track = trackSchema.safeParse(t);
-    return track.success ? track.data : [];
-  });
+  let trackData = allData
+    .flatMap((t: unknown) => {
+      const track = trackSchema.safeParse(t);
+      return track.success ? track.data : [];
+    })
+    .reverse();
 
   if (config?.range) {
     if (config.range === "short_term") {

@@ -1,7 +1,7 @@
-import Header from "@/components/header";
-import MusicChart from "@/components/music_chart";
-import RangeSelector from "@/components/range_selector";
-import getHistory from "@/fetchers/getHistory";
+import { Header } from "@/components/header";
+import { MusicChart } from "@/components/music-chart";
+import { RangeSelector } from "@/components/range-selector";
+import { getHistory } from "@/fetchers/history";
 import { TEXT_SIZES, getTopTenArtists } from "@/utils";
 import type { Range } from "@/utils/types";
 import type { Metadata } from "next";

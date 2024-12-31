@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="container mx-auto flex items-center justify-center space-x-2 p-4">
       <p className="text-center">

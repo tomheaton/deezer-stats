@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import Footer from "@/components/footer";
+import { Footer } from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";

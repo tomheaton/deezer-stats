@@ -8,7 +8,7 @@ type Props = {
   track: Track;
 };
 
-export default function TrackCard({ track }: Props) {
+export function TrackCard({ track }: Props) {
   return (
     <a href={track.link} target="_blank" rel="external noreferrer">
       <div className="flex items-center space-x-2 rounded-lg border-2 border-purple-400 p-4 transition-all hover:scale-105 active:scale-95">

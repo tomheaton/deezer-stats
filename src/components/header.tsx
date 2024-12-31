@@ -5,12 +5,13 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
-type Props = {
+export function Header({
+  pathname,
+  token,
+}: {
   pathname: Route;
   token: string;
-};
-
-export default function Header({ pathname, token }: Props) {
+}) {
   const searchParams = useSearchParams()!;
 
   const createQueryString = useCallback(

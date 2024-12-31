@@ -6,13 +6,15 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-type Props = {
+export function MusicChart({
+  labels,
+  label,
+  data,
+}: {
   labels: string[];
   label: string;
   data: number[];
-};
-
-export default function MusicChart({ labels, label, data }: Props) {
+}) {
   const chartData = useMemo(
     () => ({
       labels,

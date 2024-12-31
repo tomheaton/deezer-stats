@@ -1,4 +1,4 @@
-import type { Metadata, Route } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -31,13 +31,13 @@ export default async function Page({
       </p>
       <br />
       <div className="space-x-2">
-        <Link href={`/history?token=${token}` as Route}>
+        <Link href={`/history?token=${token}`}>
           <button className="btn">History</button>
         </Link>
-        <Link href={`/favourites?token=${token}` as Route}>
+        <Link href={`/favourites?token=${token}`}>
           <button className="btn">Favourites</button>
         </Link>
-        <Link href={`/overview?token=${token}` as Route}>
+        <Link href={`/overview?token=${token}`}>
           <button className="btn">Overview</button>
         </Link>
       </div>
