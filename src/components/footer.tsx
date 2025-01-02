@@ -17,18 +17,18 @@ export function Footer() {
       </p>
       <a href="https://deezer.com" target="_blank" rel="external noreferrer">
         <Image
-          src="/Colored_Full_Black@2x.png"
+          src="/deezer-logo-black.png"
           alt="Deezer Logo"
-          width={895}
-          height={175}
-          className="block h-4 w-auto dark:hidden"
+          width={2866}
+          height={793}
+          className="block h-6 w-auto dark:hidden"
         />
         <Image
-          src="/Colored_Full_White@2x.png"
+          src="/deezer-logo-white.png"
           alt="Deezer Logo"
-          width={895}
-          height={175}
-          className="hidden h-4 w-auto dark:block"
+          width={2866}
+          height={793}
+          className="hidden h-6 w-auto dark:block"
         />
       </a>
     </footer>
