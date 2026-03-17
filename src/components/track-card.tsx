@@ -1,7 +1,7 @@
-import type { Track } from "@/utils/types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Image from "next/image";
+import type { Track } from "@/utils/types";
 
 dayjs.extend(relativeTime);
 

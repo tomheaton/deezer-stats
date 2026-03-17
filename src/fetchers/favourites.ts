@@ -1,4 +1,4 @@
-import { trackSchema, type Range } from "@/utils/types";
+import { type Range, trackSchema } from "@/utils/types";
 
 export async function getFavourites(
   token: string,

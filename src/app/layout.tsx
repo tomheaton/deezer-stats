@@ -1,9 +1,9 @@
 import "@/styles/globals.css";
 
-import { Footer } from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
+import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://deezer-stats.tomheaton.dev"),

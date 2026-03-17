@@ -1,12 +1,12 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { Header } from "@/components/header";
 import { MusicChart } from "@/components/music-chart";
 import { RangeSelector } from "@/components/range-selector";
 import { getFavourites } from "@/fetchers/favourites";
-import { TEXT_SIZES, getTopTenArtists } from "@/utils";
+import { getTopTenArtists, TEXT_SIZES } from "@/utils";
 import type { Range } from "@/utils/types";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Favourites",
@@ -39,7 +39,7 @@ export default async function Page(props: {
         <RangeSelector />
         <div className={"flex w-full flex-wrap justify-evenly"}>
           <div className="w-full p-4 md:w-1/3">
-            <h2 className="mb-2 text-2xl font-bold tracking-tighter">
+            <h2 className="mb-2 font-bold text-2xl tracking-tighter">
               Favourite Tracks (
               {favourites.data?.length.toLocaleString() ?? "none"})
             </h2>
@@ -50,7 +50,7 @@ export default async function Page(props: {
             />
           </div>
           <div className="w-full p-4 md:w-1/3">
-            <h2 className="mb-2 text-2xl font-bold tracking-tighter">
+            <h2 className="mb-2 font-bold text-2xl tracking-tighter">
               Top Ten Artists
             </h2>
             <div className="flex flex-col space-y-1">

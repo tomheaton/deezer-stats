@@ -1,9 +1,9 @@
 "use client";
 
-import type { Range } from "@/utils/types";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import type { Range } from "@/utils/types";
 
 const ranges: { value: Range; text: string }[] = [
   { value: "short_term", text: "4 Weeks" },
@@ -13,7 +13,7 @@ const ranges: { value: Range; text: string }[] = [
 
 export function RangeSelector() {
   const pathname = usePathname();
-  const searchParams = useSearchParams()!;
+  const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -32,7 +32,9 @@ export function RangeSelector() {
           key={range.value}
           href={`${pathname}?${createQueryString("range", range.value)}`}
         >
-          <button className="btn">{range.text}</button>
+          <button type="button" className="btn">
+            {range.text}
+          </button>
         </Link>
       ))}
     </div>

@@ -12,7 +12,7 @@ export function Header({
   pathname: Route;
   token: string;
 }) {
-  const searchParams = useSearchParams()!;
+  const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -26,7 +26,7 @@ export function Header({
 
   return (
     <Link href={`${pathname}?${createQueryString("token", token)}`}>
-      <h1 className="leading-none text-5xl font-extrabold tracking-tighter transition-all hover:scale-105 active:scale-95">
+      <h1 className="font-extrabold text-5xl leading-none tracking-tighter transition-all hover:scale-105 active:scale-95">
         Deezer Stats
       </h1>
     </Link>
